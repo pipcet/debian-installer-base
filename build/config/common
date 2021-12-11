@@ -11,7 +11,7 @@
 
 # Default kernel ABI version to use. Append a kernel flavour to
 # produce KERNELVERSION.
-LINUX_KERNEL_ABI ?= 5.14.0-1
+LINUX_KERNEL_ABI ?= 5.15.0-2
 
 # Always "di" these days
 KERNEL_FLAVOUR ?= di
@@ -40,13 +40,13 @@ PRESEED =
 DPKG_UNPACK_OPTIONS = --force-overwrite
 
 # The codename of the Debian release that should be installed by default.
-DEBIAN_RELEASE = bullseye
+DEBIAN_RELEASE = bookworm
 
 # The version (number and codename) of the Debian release targeted by the
 # installation images. (Only the codename is used while the version number
 # has not yet been determined.)
-DEBIAN_VERSION = 11 (bullseye)
-DEBIAN_VERSION ?= bullseye
+DEBIAN_VERSION = 12 (bookworm)
+DEBIAN_VERSION ?= bookworm
 
 # Define here from what release (codename!) components (udebs) should be taken
 # to build debian-installer. By default this is set to 'unstable' for building
@@ -92,11 +92,12 @@ WRITE_MEDIA = floppy
 # some mapping MEDIUM -> TYPE
 TYPE = $(MEDIUM)
 
-# Used to write a /etc/lsb-release file in the installer initrd.
+# Used to write a /etc/lsb-release file in the installer initrd
+# and to brand the installer menu.
 LSB_DISTRIB_ID=Debian
-LSB_DISTRIB_DESCRIPTION="Debian $(shell uname -o) installer"
+LSB_DISTRIB_DESCRIPTION=Debian $(shell uname -o) installer
 # Inlude the build date of the installer in here.
-LSB_DISTRIB_RELEASE="$(DEBIAN_VERSION) - installer build $(BUILD_DATE)"
+LSB_DISTRIB_RELEASE=$(DEBIAN_VERSION) - installer build $(BUILD_DATE)
 
 # This keyring is only used to verify udeb downloads using apt. Since the
 # build process does not run as root, apt cannot read /etc/apt/trusted.gpg.
